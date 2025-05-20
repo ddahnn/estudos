@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 class Pessoa ( ABC ):
-
+    _listapessoa = []
     def __init__(self, nome, cpf, endereco) :
         self.nome = nome
         self._cpf = cpf

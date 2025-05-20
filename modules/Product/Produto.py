@@ -1,49 +1,46 @@
 from abc import ABC, abstractmethod
 
-class Produto(ABC):
-    _produtos = []
-    __idProduto = 0
-
-    def __init__(self, nome, codigo, preco = 0.0, estoque = 0 ):
+class Produto( ABC ):
+    _Id = 0
+    lista = []
+    def __init__( self,estoque=0, nome="", codigo='' ):
+        Produto._Id +=1
+        self._id = Produto._Id
         self.nome = nome
         self.codigo = codigo
-        self.preco = preco
+        self._preco = 0.0
         self.estoque = estoque
-        Produto.__idProduto += 1
-        self.__id = Produto.__idProduto
 
-        Produto._produtos.append({
-            "ID": self.__id,
-            "Nome": self.nome,
-            "Código": self.codigo,
-            "Preço": self.preco,
-            "Estoque": self.estoque
-        })
-
-    @classmethod
-    def repor_estoque(cls, id_produto, nome_produto, quantidade):
-        if quantidade <= 0:
-            print("A quantidade deve ser maior que zero.")
-            return
-        for produto in cls._produtos:
-            if produto["ID"] == id_produto and produto["Nome"].lower() == nome_produto.lower():
-                produto["Estoque"] += quantidade
-                print(f"Estoque do produto '{produto['Nome']}' atualizado para {produto['Estoque']}.")
-                return
-        print("Produto não encontrado. Verifique o ID e o nome.")
+    def reporEstoque(self, quantidade):
+        if not all([self.nome, self.codigo]) or self._preco <= 0:
+            return "Necessário todos os dados para cadastro."
+        if not any(prod["Nome"] == self.nome and prod["Código"] == self.codigo for prod in Produto.lista):
+            return "Produto não cadastrado."
+        for prod in Produto.lista:
+            if prod["Nome"] == self.nome and prod["Código"] == self.codigo:
+                prod["Estoque"] += quantidade
+                return f"Estoque atualizado para {prod['Estoque']} unidades do produto {prod['Nome']}."
+        return "Erro ao atualizar o estoque."
+    
 
     @abstractmethod
-    def cadastrarProduto(self):
+    def cadastrar(self):
         pass
 
-    @classmethod
-    def venderUnidade(cls, id_produto, nome):
-        for produto in cls._produtos:
-            if produto["ID"] == id_produto and produto["Nome"].lower() == nome.lower():
-                if produto["Estoque"] > 0:
-                    produto["Estoque"] -= 1
-                    print(f"Estoque do produto '{produto['Nome']}' atualizado para {produto['Estoque']}.")
-                else:
-                    print("Produto sem estoque.")
-                return
-        print("Produto não encontrado. Verifique o ID e o nome.")
+    def ver_estoque(self):
+        for produto in Produto.lista:
+            print(f"produto: {produto}\n")
+
+    def get_preco(self):
+        return f"R$ {self.preco:.2f}".replace(".",",")
+
+
+
+    @property
+    def preco(self):
+        return self._preco
+
+    @preco.setter
+    def preco(self, novo_preco):
+        if novo_preco > 0.0:
+            self._preco = novo_preco

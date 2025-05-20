@@ -1,7 +1,7 @@
 from modules.personas.Pessoa import Pessoa
 
 class Funcionario( Pessoa ) :
-    __listaFunc = []
+
     __idFunc = 0
     def __init__(self, nome, cpf, endereco):
         super().__init__(nome, cpf, endereco)
@@ -11,7 +11,7 @@ class Funcionario( Pessoa ) :
     def cadastrar(self):
         if not all([self.nome, self._cpf, self.endereco]):
             print('Necessario todos os dados Para efetuar o cadastro.')
-        elif any(func["CPF"] ==self._cpf for func in Funcionario.__listaFunc):
+        elif any(func["CPF"] ==self._cpf for func in Pessoa._listapessoa):
             print(f"O cliente já esta cadastrado")
         else:
             pessoa={
@@ -20,12 +20,12 @@ class Funcionario( Pessoa ) :
                 "CPF": self._cpf,
                 "Endereço": self.endereco
             }
-            Funcionario.__listaFunc.append(pessoa)
+            Pessoa._listapessoa.append(pessoa)
             print(f"O Funcionario  {pessoa['Nome']}, foi adicionado.")
 
     @classmethod
-    def  ver_lista( cls ):
-       for funcionario in cls.__listaFunc:
+    def  ver_lista( self ):
+       for funcionario in Pessoa._listapessoa:
            return f"""
         ***   Lista de Funcionarios   ***
         \n{funcionario}

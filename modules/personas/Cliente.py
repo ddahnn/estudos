@@ -1,7 +1,6 @@
 from modules.personas.Pessoa import Pessoa
 
 class Cliente( Pessoa ) :
-    __listaCliente = []
     __idCliente = 0
     def __init__(self, nome, cpf, endereco):
         super().__init__(nome, cpf, endereco)
@@ -11,7 +10,7 @@ class Cliente( Pessoa ) :
     def cadastrar(self):
         if not all([self.nome, self._cpf, self.endereco]):
             print('Necessario todos os dados Para efetuar o cadastro.')
-        elif self._cpf in Cliente.__listaCliente:
+        elif self._cpf in Pessoa._listapessoa:
             print(f"O cliente já esta cadastrado")
         else:
             pessoa={
@@ -20,12 +19,12 @@ class Cliente( Pessoa ) :
                 "CPF": self._cpf,
                 "Endereço": self.endereco
             }
-            Cliente.__listaCliente.append(pessoa)
+            Pessoa._listapessoa.append(pessoa)
             print(f"O Cliente  {pessoa['Nome']}, foi adicionado.")
 
     @classmethod
-    def  ver_lista( cls ):
-        for cliente in Cliente.__listaCliente:
+    def  ver_lista( self ):
+        for cliente in Pessoa._listapessoa:
             return   f"""
     ***   Lista de cadastro   ***
     \n{cliente}
