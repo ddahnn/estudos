@@ -1,0 +1,4 @@
+Olá Mundo!
+Este é uma linha de exeplo 1
+esta é o exemplo 2
+Os animais não pensam

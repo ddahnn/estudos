@@ -1,35 +1,20 @@
-from modules.Genero import Genero
-from modules.JogoFisico import JogoFisico
-from modules.JogoDigital import JogoDigital
-line = "*"
+from modules.Marca import Marca
+from modules.Carro import Carro
+from modules.Moto import Moto
 
-gen = Genero("Ação")
+m = Marca("honda")
 
+c1 = Carro("Fit", "Branco", m ,4, 75000.00)
 
-gen2=Genero("c")
-j1 = JogoFisico("a", 'b', gen2, "d", 1 )
-j2 = JogoFisico("ae", 'f', gen, "g", 8 )
-
-j1.cadastrar()
-j2.cadastrar()
+c1.cadastrar()
+print("")
+print(c1.exibirLista())
 
 
+print("Moto")
+mm1 = Marca("Honda")
+m1 = Moto("Strada", "Roxa", mm1, 200, 4000.00)
 
-g3 = Genero("Comedia")
-g4 = Genero("Terror")
-jd = JogoDigital("h", "i", g3, 19.5, 255.9)
-jd2 = JogoDigital("cv", "m", g4, 55.5, 299.59)
+m1.cadastrar()
 
-jd.cadastrar()
-jd2.cadastrar()
-
-
-
-
-print(f"\n\n" + line*20 + "lista fisica" + line*20 + f"\n\n")
-j1.ver_Lista()
-
-
-print(f"\n\n" + line*20 + "lista Digital" + line*20 + f"\n\n")
-
-jd.ver_Lista()
+print(m1.exibirLista())
