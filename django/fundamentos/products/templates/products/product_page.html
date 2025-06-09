@@ -1,0 +1,16 @@
+{% extends 'layout.html'%}
+{%block title%}
+    {{product.name}}
+{%endblock%}
+
+{%block content%}
+    <img
+        class='banner'
+        src='{{product.banner.url}}'
+        alt="{{product}}"
+    >
+    <h2>Nome: {{product.name}}</h2>
+    <p>R${{product.price}}</p>
+    <p>estoque: {{product.stock}}</p>
+    <p>{{product.description}}</p>
+{%endblock%}

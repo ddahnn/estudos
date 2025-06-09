@@ -1,0 +1,19 @@
+{% include "layout.html" %}
+{%block title%}
+    About
+{% endblock %}
+
+
+{% block content%}
+    <h1>About</h1>
+    <p>Acesse a pagina <a href="/home">Home</a>
+
+        <br><hr>
+        
+        <ul>
+            {% for fruta in frutas %}
+            <li>{{fruta}}</li>
+        {% endfor %}
+        </ul>
+    </p>
+{%  endblock %}
